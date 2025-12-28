@@ -4,4 +4,7 @@ __pycache__/
 *.pyc
 .git/
 .gitignore
-main.ipynb
+*.ipynb
+.vercel/
+*.log
+*.pkl
