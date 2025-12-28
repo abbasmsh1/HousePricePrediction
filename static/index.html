@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>House Price Predictor</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <h1 class="logo">🏡 House Price Predictor</h1>
+        <div class="nav-links">
+          <button class="nav-btn active" onclick="showPage('prediction')">
+            Predict Price
+          </button>
+          <button class="nav-btn" onclick="showPage('metrics')">
+            Model Metrics
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Prediction Page -->
+    <div id="prediction-page" class="page active">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-content">
+          <h2 class="hero-title">Predict Your Dream Home's Value</h2>
+          <p class="hero-subtitle">
+            Get accurate price estimates powered by advanced machine learning
+          </p>
+        </div>
+      </section>
+
+      <!-- Main Content -->
+      <div class="container">
+        <div class="content-grid">
+          <!-- House Image -->
+          <div class="image-section">
+            <div class="image-card">
+              <img
+                src="/static/house.png"
+                alt="House for sale"
+                class="house-image"
+              />
+              <div class="image-overlay">
+                <div class="for-sale-sign">
+                  <h3>FOR SALE</h3>
+                  <p>Find Your Perfect Home</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Form -->
+          <div class="form-section">
+            <div class="form-card">
+              <h3 class="form-title">Enter House Details</h3>
+              <form id="prediction-form">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="bedrooms">Bedrooms</label>
+                    <input
+                      type="number"
+                      id="bedrooms"
+                      name="bedrooms"
+                      step="0.5"
+                      required
+                      placeholder="3"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="bathrooms">Bathrooms</label>
+                    <input
+                      type="number"
+                      id="bathrooms"
+                      name="bathrooms"
+                      step="0.25"
+                      required
+                      placeholder="2"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="sqft_living">Living Area (sqft)</label>
+                    <input
+                      type="number"
+                      id="sqft_living"
+                      name="sqft_living"
+                      required
+                      placeholder="2000"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="sqft_lot">Lot Size (sqft)</label>
+                    <input
+                      type="number"
+                      id="sqft_lot"
+                      name="sqft_lot"
+                      required
+                      placeholder="5000"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="floors">Floors</label>
+                    <input
+                      type="number"
+                      id="floors"
+                      name="floors"
+                      step="0.5"
+                      required
+                      placeholder="1"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="waterfront">Waterfront</label>
+                    <select id="waterfront" name="waterfront" required>
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="view">View Quality (0-4)</label>
+                    <input
+                      type="number"
+                      id="view"
+                      name="view"
+                      min="0"
+                      max="4"
+                      required
+                      placeholder="0"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="condition">Condition (1-5)</label>
+                    <input
+                      type="number"
+                      id="condition"
+                      name="condition"
+                      min="1"
+                      max="5"
+                      required
+                      placeholder="3"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="sqft_above">Above Ground (sqft)</label>
+                    <input
+                      type="number"
+                      id="sqft_above"
+                      name="sqft_above"
+                      required
+                      placeholder="1500"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="sqft_basement">Basement (sqft)</label>
+                    <input
+                      type="number"
+                      id="sqft_basement"
+                      name="sqft_basement"
+                      required
+                      placeholder="0"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="yr_built">Year Built</label>
+                    <input
+                      type="number"
+                      id="yr_built"
+                      name="yr_built"
+                      min="1800"
+                      max="2025"
+                      required
+                      placeholder="2000"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="yr_renovated">Year Renovated</label>
+                    <input
+                      type="number"
+                      id="yr_renovated"
+                      name="yr_renovated"
+                      min="0"
+                      max="2025"
+                      required
+                      placeholder="0"
+                    />
+                  </div>
+
+                  <div class="form-group full-width">
+                    <label for="city">City</label>
+                    <input
+                      type="text"
+                      id="city"
+                      name="city"
+                      required
+                      placeholder="Seattle"
+                    />
+                  </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                  <span class="btn-text">Predict Price</span>
+                  <span class="btn-icon">→</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results-section" class="results-section hidden">
+          <div class="results-card">
+            <h3 class="results-title">Prediction Results</h3>
+
+            <div class="ensemble-result">
+              <p class="result-label">Estimated Price</p>
+              <p class="result-price" id="ensemble-price">$0</p>
+              <p class="result-confidence">
+                Confidence: <span id="confidence-level">-</span>
+              </p>
+            </div>
+
+            <div class="individual-results">
+              <h4>Individual Model Predictions</h4>
+              <div class="models-grid" id="models-grid">
+                <!-- Model predictions will be inserted here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Metrics Page -->
+    <div id="metrics-page" class="page">
+      <div class="container">
+        <h2 class="page-title">Model Performance Metrics</h2>
+
+        <div class="metrics-grid" id="metrics-grid">
+          <!-- Metrics cards will be inserted here -->
+        </div>
+
+        <div class="charts-section">
+          <h3 class="section-title">Error Distribution Analysis</h3>
+          <div class="charts-grid" id="charts-grid">
+            <!-- Charts will be inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+      <div class="spinner"></div>
+      <p>Calculating prediction...</p>
+    </div>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
